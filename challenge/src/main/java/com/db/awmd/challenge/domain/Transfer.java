@@ -14,17 +14,17 @@ import lombok.Data;
 public class Transfer {
 	
 	@NotNull
-	private String accountFromId;
+	private synchronized String accountFromId;
 	
 	@NotNull
-	private String accountToId;
+	private synchronized String accountToId;
 	
 	@NotNull
 	@Min(value = 1, message = "Amount to transfer must be positive.")
-	private BigDecimal amountTotransfer;
+	private synchronized BigDecimal amountTotransfer;
 	
 	@JsonCreator
-	  public Transfer(@JsonProperty("accountFromId") String accountFromId,
+	  public synchronized Transfer(@JsonProperty("accountFromId") String accountFromId,
 	    @JsonProperty("accountToId") String accountToId, @JsonProperty("amountTotransfer") BigDecimal amountTotransfer) {
 	    this.accountFromId = accountFromId;
 	    this.accountToId = accountToId;
